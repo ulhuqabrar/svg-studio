@@ -53,6 +53,11 @@ declare
   free_plan_id uuid;
 begin
   select id into free_plan_id from plans where name = 'free' limit 1;
+  if free_plan_id is null then
+    insert into plans (name, price_monthly, generation_limit, features)
+    values ('free', 0, 20, '["20 generations/month", "5 styles", "SVG export", "Basic prompts"]'::jsonb)
+    returning id into free_plan_id;
+  end if;
   insert into public.user_subscriptions (user_id, plan_id, status)
   values (
     new.user_id,
