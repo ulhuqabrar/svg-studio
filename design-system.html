@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Studio - Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #5A84F8; --primary-fg: #F0F4FF; --secondary: #2C3D8F; --secondary-fg: #F1F2F5;
+      --bg: #FFFFFF; --fg: #192038; --card: #FFFFFF; --card-fg: #192038;
+      --muted: #F1F2F5; --muted-fg: #6A6B83; --accent: #F1F2F5; --accent-fg: #192038;
+      --destructive: #F53D3D; --destructive-fg: #F0F4FF;
+      --border: #E4E6EB; --input: #E4E6EB; --ring: #5A84F8;
+      --blue-light: #DCDFFF; --blue-subtle: #F2F4FF; --soft: #A8B1CE;
+    }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    .header { background: rgba(255,255,255,0.9); border-bottom: 1px solid var(--border); padding: 20px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 20px; font-weight: 600; color: var(--primary); }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a { text-decoration: none; color: var(--muted-fg); font-size: 13px; font-weight: 500; }
+    .nav-links a:hover { color: var(--fg); }
+    section { padding: 56px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    .st { font-size: 32px; font-weight: 700; margin-bottom: 6px; }
+    .sd { font-size: 15px; color: var(--muted-fg); margin-bottom: 32px; max-width: 560px; }
+    .cg { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .cc { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+    .cs { height: 80px; display: flex; align-items: flex-end; padding: 8px 12px; }
+    .cs span { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.25); }
+    .ci { padding: 10px 12px; }
+    .cn { font-size: 13px; font-weight: 500; }
+    .cv { font-size: 11px; color: var(--muted-fg); font-family: monospace; }
+    .tr { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .tl { min-width: 130px; font-size: 11px; font-weight: 500; color: var(--muted-fg); flex-shrink: 0; }
+    .sg { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+    .si { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: var(--muted); border-radius: 10px; }
+    .sb { height: 20px; background: var(--primary); border-radius: 3px; opacity: 0.6; }
+    .sm { font-size: 12px; font-weight: 500; }
+    .sm small { display: block; font-weight: 400; color: var(--muted-fg); font-size: 10px; }
+    .rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+    .ri { text-align: center; padding: 20px 14px; background: var(--muted); }
+    .rb { width: 64px; height: 64px; background: var(--primary); margin: 0 auto 10px; opacity: 0.7; }
+    .shg { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .shi { padding: 28px 20px; background: var(--card); border-radius: 14px; }
+    .cs2 { margin-bottom: 40px; }
+    .ct { font-size: 18px; font-weight: 600; margin-bottom: 3px; }
+    .cf { font-size: 11px; color: var(--muted-fg); font-family: monospace; margin-bottom: 16px; }
+    .br { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 500; white-space: nowrap; transition: all 0.15s; }
+    .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .bx { height: 22px; padding: 0 8px; font-size: 10px; border-radius: 10px; }
+    .bs { height: 28px; padding: 0 10px; font-size: 11px; border-radius: 12px; }
+    .bm { height: 34px; padding: 0 12px; font-size: 12px; border-radius: 14px; }
+    .bl { height: 38px; padding: 0 14px; font-size: 12px; border-radius: 16px; }
+    .bp { background: var(--primary); color: var(--primary-fg); }
+    .bp:hover { filter: brightness(0.9); }
+    .bsec { background: var(--secondary); color: var(--secondary-fg); }
+    .bo { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+    .bo:hover { background: var(--muted); }
+    .bg { background: transparent; color: var(--fg); }
+    .bg:hover { background: var(--muted); }
+    .bd { background: rgba(245,61,61,0.1); color: var(--destructive); }
+    .bd:hover { background: rgba(245,61,61,0.2); }
+    .bl2 { background: transparent; color: var(--primary); text-decoration: underline; text-underline-offset: 4px; }
+    .badge { display: inline-flex; align-items: center; height: 18px; padding: 0 7px; border-radius: 10px; font-size: 10px; font-weight: 500; border: 1px solid transparent; }
+    .input-demo { height: 34px; width: 280px; max-width: 100%; padding: 0 12px; border-radius: 18px; border: 1px solid var(--input); background: rgba(228,230,235,0.3); font-family: 'Poppins', sans-serif; font-size: 12px; color: var(--fg); outline: none; }
+    .input-demo:focus { border-color: var(--ring); box-shadow: 0 0 0 3px rgba(90,132,248,0.2); }
+    .card-demo { background: var(--card); border-radius: 14px; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(90,132,248,0.06); padding: 20px; max-width: 360px; }
+    .tabs-demo { display: inline-flex; background: var(--muted); border-radius: 18px; padding: 3px; }
+    .tab-t { padding: 5px 10px; border-radius: 10px; font-size: 12px; font-weight: 500; border: none; background: transparent; color: var(--muted-fg); cursor: pointer; font-family: 'Poppins', sans-serif; }
+    .tab-t.a { background: var(--bg); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .ag { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .ai { padding: 20px; background: var(--muted); border-radius: 10px; text-align: center; }
+    .ab { width: 40px; height: 40px; background: var(--primary); border-radius: 10px; margin: 0 auto 10px; opacity: 0.7; }
+    .af .ab { animation: float 6s ease-in-out infinite; }
+    .am .ab { animation: float 5s ease-in-out infinite; }
+    .aff .ab { animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .sel ::selection { background: var(--blue-light); color: var(--secondary); }
+    .fd:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+    @media(max-width:768px){.st{font-size:24px}.tr{flex-direction:column;gap:6px}.tl{min-width:auto}.nav-links{display:none}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">SVG Studio</div>
+      <nav class="nav-links">
+        <a href="#colors">Colors</a><a href="#typography">Typography</a><a href="#spacing">Spacing</a>
+        <a href="#radius">Radius</a><a href="#shadows">Shadows</a><a href="#components">Components</a><a href="#animations">Animations</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+
+    <section id="colors">
+      <h2 class="st">Colors</h2>
+      <p class="sd">Core palette and CSS variable system for light and dark modes.</p>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;">Primary Palette</h3>
+      <div class="cg" style="margin-bottom:32px;">
+        <div class="cc"><div class="cs" style="background:#5A84F8;"><span>Primary</span></div><div class="ci"><div class="cn">Primary</div><div class="cv">#5A84F8</div></div></div>
+        <div class="cc"><div class="cs" style="background:#2C3D8F;"><span style="color:#fff">Secondary</span></div><div class="ci"><div class="cn">Secondary</div><div class="cv">#2C3D8F</div></div></div>
+        <div class="cc"><div class="cs" style="background:#6A6B83;"><span style="color:#fff">Muted FG</span></div><div class="ci"><div class="cn">Muted Foreground</div><div class="cv">#6A6B83</div></div></div>
+        <div class="cc"><div class="cs" style="background:#A8B1CE;"><span style="color:#192038">Soft</span></div><div class="ci"><div class="cn">Soft</div><div class="cv">#A8B1CE</div></div></div>
+        <div class="cc"><div class="cs" style="background:#DCDFFF;"><span style="color:#2C3D8F">Blue Light</span></div><div class="ci"><div class="cn">Blue Light</div><div class="cv">#DCDFFF</div></div></div>
+        <div class="cc"><div class="cs" style="background:#F2F4FF;"><span style="color:#2C3D8F">Blue Subtle</span></div><div class="ci"><div class="cn">Blue Subtle</div><div class="cv">#F2F4FF</div></div></div>
+      </div>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;">CSS Variables (Light Mode)</h3>
+      <div class="cg">
+        <div class="cc"><div class="cs" style="background:#FFF;border-bottom:1px solid #E4E6EB"><span style="color:#192038">Background</span></div><div class="ci"><div class="cn">--background</div><div class="cv">0 0% 100%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#192038"><span>Foreground</span></div><div class="ci"><div class="cn">--foreground</div><div class="cv">222 47% 11%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#5A84F8"><span>Primary</span></div><div class="ci"><div class="cn">--primary</div><div class="cv">224 76% 66%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#2C3D8F"><span style="color:#fff">Secondary</span></div><div class="ci"><div class="cn">--secondary</div><div class="cv">220 60% 36%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#F1F2F5"><span style="color:#192038">Muted</span></div><div class="ci"><div class="cn">--muted</div><div class="cv">220 14% 96%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#F53D3D"><span>Destructive</span></div><div class="ci"><div class="cn">--destructive</div><div class="cv">0 84% 60%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#E4E6EB"><span style="color:#192038">Border</span></div><div class="ci"><div class="cn">--border</div><div class="cv">220 13% 91%</div></div></div>
+        <div class="cc"><div class="cs" style="background:#E4E6EB"><span style="color:#192038">Ring</span></div><div class="ci"><div class="cn">--ring</div><div class="cv">224 76% 66%</div></div></div>
+      </div>
+    </section>
+
+    <section id="typography">
+      <h2 class="st">Typography</h2>
+      <p class="sd">Poppins font family with weights 300-700. All text is antialiased.</p>
+      <div class="tr"><div class="tl">Hero H1 (56px/700)</div><div style="font-size:48px;font-weight:700;line-height:56px;">Generate SVG Icons</div></div>
+      <div class="tr"><div class="tl">Section H2 (36px/700)</div><div style="font-size:32px;font-weight:700;line-height:40px;">How It Works</div></div>
+      <div class="tr"><div class="tl">Card Title (15px/500)</div><div style="font-size:15px;font-weight:500;">Style Library</div></div>
+      <div class="tr"><div class="tl">Body (14px/400)</div><div style="font-size:14px;color:var(--muted-fg)">Create consistent SVG icons from text prompts.</div></div>
+      <div class="tr"><div class="tl">Label (12px/500)</div><div style="font-size:12px;font-weight:500">Badge Text</div></div>
+      <div class="tr"><div class="tl">Micro (10px/500)</div><div style="font-size:10px;font-weight:500">Keyboard shortcut: Command+K</div></div>
+      <div class="tr"><div class="tl">Auth (22px/600)</div><div style="font-size:22px;font-weight:600">Welcome back</div></div>
+      <div class="tr"><div class="tl">Price (32px/600)</div><div style="font-size:32px;font-weight:600">$19<span style="font-size:15px;font-weight:400;color:var(--muted-fg)">/mo</span></div></div>
+    </section>
+
+    <section id="spacing">
+      <h2 class="st">Spacing</h2>
+      <p class="sd">Custom spacing scale with Tailwind utility classes.</p>
+      <div class="sg">
+        <div class="si"><div class="sb" style="width:2px"></div><div class="sm">2px<small>gap-0.5</small></div></div>
+        <div class="si"><div class="sb" style="width:4px"></div><div class="sm">4px<small>gap-1</small></div></div>
+        <div class="si"><div class="sb" style="width:6px"></div><div class="sm">6px<small>gap-1.5</small></div></div>
+        <div class="si"><div class="sb" style="width:8px"></div><div class="sm">8px<small>gap-2</small></div></div>
+        <div class="si"><div class="sb" style="width:10px"></div><div class="sm">10px<small>gap-2.5</small></div></div>
+        <div class="si"><div class="sb" style="width:12px"></div><div class="sm">12px<small>gap-3</small></div></div>
+        <div class="si"><div class="sb" style="width:16px"></div><div class="sm">16px<small>gap-4</small></div></div>
+        <div class="si"><div class="sb" style="width:20px"></div><div class="sm">20px<small>gap-5</small></div></div>
+        <div class="si"><div class="sb" style="width:24px"></div><div class="sm">24px<small>gap-6</small></div></div>
+        <div class="si"><div class="sb" style="width:32px"></div><div class="sm">32px<small>gap-8</small></div></div>
+        <div class="si"><div class="sb" style="width:40px"></div><div class="sm">40px<small>gap-10</small></div></div>
+        <div class="si"><div class="sb" style="width:48px"></div><div class="sm">48px<small>gap-12</small></div></div>
+        <div class="si"><div class="sb" style="width:72px"></div><div class="sm">72px<small>p-18</small></div></div>
+        <div class="si"><div class="sb" style="width:88px"></div><div class="sm">88px<small>p-22</small></div></div>
+        <div class="si"><div class="sb" style="width:120px"></div><div class="sm">120px<small>p-30</small></div></div>
+      </div>
+    </section>
+
+    <section id="radius">
+      <h2 class="st">Border Radius</h2>
+      <p class="sd">Base radius: 10px (0.625rem) with derived values.</p>
+      <div class="rg">
+        <div class="ri"><div class="rb" style="border-radius:6px"></div><div style="font-size:12px;font-weight:500">sm</div><div style="font-size:10px;color:var(--muted-fg)">6px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:8px"></div><div style="font-size:12px;font-weight:500">md</div><div style="font-size:10px;color:var(--muted-fg)">8px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:10px"></div><div style="font-size:12px;font-weight:500">lg / default</div><div style="font-size:10px;color:var(--muted-fg)">10px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:12px"></div><div style="font-size:12px;font-weight:500">xl</div><div style="font-size:10px;color:var(--muted-fg)">12px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:16px"></div><div style="font-size:12px;font-weight:500">2xl</div><div style="font-size:10px;color:var(--muted-fg)">16px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:20px"></div><div style="font-size:12px;font-weight:500">card</div><div style="font-size:10px;color:var(--muted-fg)">20px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:24px"></div><div style="font-size:12px;font-weight:500">3xl</div><div style="font-size:10px;color:var(--muted-fg)">24px</div></div>
+        <div class="ri"><div class="rb" style="border-radius:999px"></div><div style="font-size:12px;font-weight:500">pill</div><div style="font-size:10px;color:var(--muted-fg)">999px</div></div>
+      </div>
+    </section>
+
+    <section id="shadows">
+      <h2 class="st">Shadows</h2>
+      <p class="sd">Blue-tinted shadows for depth and hierarchy.</p>
+      <div class="shg">
+        <div class="shi" style="box-shadow:0 1px 3px rgba(90,132,248,0.06),0 1px 2px rgba(0,0,0,0.04)"><div style="font-size:12px;font-weight:500;margin-bottom:3px">shadow-card</div><div style="font-size:10px;color:var(--muted-fg);font-family:monospace">0 1px 3px rgba(90,132,248,0.06)</div></div>
+        <div class="shi" style="box-shadow:0 4px 12px rgba(90,132,248,0.08),0 2px 4px rgba(0,0,0,0.04)"><div style="font-size:12px;font-weight:500;margin-bottom:3px">shadow-card-hover</div><div style="font-size:10px;color:var(--muted-fg);font-family:monospace">0 4px 12px rgba(90,132,248,0.08)</div></div>
+        <div class="shi" style="box-shadow:0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(90,132,248,0.04)"><div style="font-size:12px;font-weight:500;margin-bottom:3px">shadow-nav</div><div style="font-size:10px;color:var(--muted-fg);font-family:monospace">0 1px 3px rgba(0,0,0,0.04)</div></div>
+        <div class="shi" style="box-shadow:0 8px 24px rgba(90,132,248,0.1),0 2px 8px rgba(0,0,0,0.04)"><div style="font-size:12px;font-weight:500;margin-bottom:3px">shadow-float</div><div style="font-size:10px;color:var(--muted-fg);font-family:monospace">0 8px 24px rgba(90,132,248,0.1)</div></div>
+      </div>
+    </section>
+
+    <section id="components">
+      <h2 class="st">Components</h2>
+      <p class="sd">shadcn v4 base-maia components built on @base-ui/react.</p>
+
+      <div class="cs2">
+        <div class="ct">Button</div><div class="cf">src/components/ui/button.tsx</div>
+        <div style="font-size:12px;font-weight:500;margin-bottom:10px;color:var(--muted-fg)">Variants</div>
+        <div class="br">
+          <button class="btn bm bp">Primary</button>
+          <button class="btn bm bsec">Secondary</button>
+          <button class="btn bm bo">Outline</button>
+          <button class="btn bm bg">Ghost</button>
+          <button class="btn bm bd">Destructive</button>
+          <button class="btn bm bl2">Link</button>
+        </div>
+        <div style="font-size:12px;font-weight:500;margin:16px 0 10px;color:var(--muted-fg)">Sizes</div>
+        <div class="br">
+          <button class="btn bx bp">XS</button>
+          <button class="btn bs bp">Small</button>
+          <button class="btn bm bp">Default</button>
+          <button class="btn bl bp">Large</button>
+        </div>
+      </div>
+
+      <div class="cs2">
+        <div class="ct">Badge</div><div class="cf">src/components/ui/badge.tsx</div>
+        <div class="br" style="margin-top:10px">
+          <span class="badge" style="background:var(--primary);color:var(--primary-fg)">Primary</span>
+          <span class="badge" style="background:var(--secondary);color:var(--secondary-fg)">Secondary</span>
+          <span class="badge" style="background:rgba(245,61,61,0.1);color:var(--destructive)">Destructive</span>
+          <span class="badge" style="color:var(--fg);border-color:var(--border)">Outline</span>
+          <span class="badge" style="color:var(--muted-fg)">Ghost</span>
+        </div>
+      </div>
+
+      <div class="cs2">
+        <div class="ct">Input</div><div class="cf">src/components/ui/input.tsx</div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px;max-width:360px">
+          <input class="input-demo" placeholder="Default input">
+          <input class="input-demo" placeholder="Focused input" style="border-color:var(--ring);box-shadow:0 0 0 3px rgba(90,132,248,0.2)">
+          <input class="input-demo" placeholder="Disabled" disabled style="opacity:0.5;cursor:not-allowed">
+        </div>
+      </div>
+
+      <div class="cs2">
+        <div class="ct">Card</div><div class="cf">src/components/ui/card.tsx</div>
+        <div class="card-demo" style="margin-top:10px">
+          <h3 style="font-size:15px;font-weight:500;margin-bottom:3px">Card Title</h3>
+          <p style="font-size:12px;color:var(--muted-fg);margin-bottom:14px">Description with supporting content.</p>
+          <div style="display:flex;gap:6px">
+            <button class="btn bs bp">Action</button>
+            <button class="btn bs bg">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs2">
+        <div class="ct">Tabs</div><div class="cf">src/components/ui/tabs.tsx</div>
+        <div class="tabs-demo" style="margin-top:10px">
+          <button class="tab-t a">Overview</button>
+          <button class="tab-t">Analytics</button>
+          <button class="tab-t">Settings</button>
+        </div>
+      </div>
+
+      <div class="cs2">
+        <div class="ct">Separator</div><div class="cf">src/components/ui/separator.tsx</div>
+        <div style="margin-top:10px;max-width:360px">
+          <p style="font-size:12px">Content above</p>
+          <div style="height:1px;background:var(--border);margin:10px 0"></div>
+          <p style="font-size:12px">Content below</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="animations">
+      <h2 class="st">Animations</h2>
+      <p class="sd">Custom keyframes for floating and drawing effects.</p>
+      <div class="ag">
+        <div class="ai af"><div class="ab"></div><div style="font-size:12px;font-weight:500">Float Slow</div><div style="font-size:10px;color:var(--muted-fg)">6s ease-in-out</div></div>
+        <div class="ai am"><div class="ab"></div><div style="font-size:12px;font-weight:500">Float Medium</div><div style="font-size:10px;color:var(--muted-fg)">5s ease-in-out</div></div>
+        <div class="ai aff"><div class="ab"></div><div style="font-size:12px;font-weight:500">Float Fast</div><div style="font-size:10px;color:var(--muted-fg)">4s ease-in-out</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="st">Selection & Focus</h2>
+      <p class="sd">Global styles for text selection and keyboard focus.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:560px">
+        <div style="padding:20px;background:var(--muted);border-radius:10px">
+          <div style="font-size:12px;font-weight:500;margin-bottom:6px">Text Selection</div>
+          <p class="sel" style="font-size:13px;color:var(--muted-fg)">Select this: <strong style="color:var(--fg)">SVG Studio</strong></p>
+        </div>
+        <div style="padding:20px;background:var(--muted);border-radius:10px">
+          <div style="font-size:12px;font-weight:500;margin-bottom:6px">Focus Ring</div>
+          <button class="btn bm bo fd" style="width:100%">Tab to focus</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="st">Configuration</h2>
+      <p class="sd">Project setup and dependency details.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+        <div style="padding:18px;background:var(--muted);border-radius:10px">
+          <div style="font-size:12px;font-weight:500;margin-bottom:10px">Framework</div>
+          <div style="font-size:12px;color:var(--muted-fg);line-height:1.8">
+            <div><strong>UI:</strong> shadcn v4 (base-maia)</div>
+            <div><strong>Primitives:</strong> @base-ui/react</div>
+            <div><strong>CSS:</strong> Tailwind CSS 3.4</div>
+            <div><strong>Animations:</strong> tailwindcss-animate + framer-motion</div>
+            <div><strong>Icons:</strong> lucide-react</div>
+          </div>
+        </div>
+        <div style="padding:18px;background:var(--muted);border-radius:10px">
+          <div style="font-size:12px;font-weight:500;margin-bottom:10px">Design Tokens</div>
+          <div style="font-size:12px;color:var(--muted-fg);line-height:1.8">
+            <div><strong>Font:</strong> Poppins (300-700)</div>
+            <div><strong>Base radius:</strong> 10px (0.625rem)</div>
+            <div><strong>Dark mode:</strong> class-based (.dark)</div>
+            <div><strong>Max width:</strong> 1200px (landing)</div>
+            <div><strong>Container:</strong> 1050px (generator)</div>
+          </div>
+        </div>
+        <div style="padding:18px;background:var(--muted);border-radius:10px">
+          <div style="font-size:12px;font-weight:500;margin-bottom:10px">Global Styles</div>
+          <div style="font-size:12px;color:var(--muted-fg);line-height:1.8">
+            <div><strong>Smoothing:</strong> antialiased</div>
+            <div><strong>Scroll:</strong> smooth</div>
+            <div><strong>Selection:</strong> #DCDFFF bg, #2C3D8F text</div>
+            <div><strong>Focus:</strong> 2px solid #5A84F8</div>
+            <div><strong>Reduced motion:</strong> supported</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="border-top:1px solid var(--border);padding:24px 0;margin-top:20px">
+    <div class="container" style="text-align:center">
+      <p style="font-size:12px;color:var(--muted-fg)">SVG Studio Design System</p>
+    </div>
+  </footer>
+</body>
+</html>
