@@ -71,19 +71,6 @@ export default function Hero() {
       <div className="relative max-w-[1160px] mx-auto px-5">
         {/* Text content */}
         <div className="text-center mb-16 md:mb-24">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0 }}
-            className="flex justify-center mb-6"
-          >
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[12px] font-medium text-primary bg-primary/[0.06] border border-primary/10 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              AI-powered SVG creation
-            </span>
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
