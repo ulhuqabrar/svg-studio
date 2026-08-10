@@ -1,6 +1,5 @@
 import Navbar from "@/components/landing/navbar";
 import Hero from "@/components/landing/hero";
-import HeroProduct from "@/components/landing/hero-product";
 import SocialProof from "@/components/landing/social-proof";
 import Problem from "@/components/landing/problem";
 import HowItWorks from "@/components/landing/how-it-works";
@@ -19,7 +18,6 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <Navbar />
       <Hero />
-      <HeroProduct />
       <SocialProof />
       <Problem />
       <HowItWorks />

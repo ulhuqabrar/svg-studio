@@ -42,7 +42,7 @@ const generatedIcons = [
 export default function HeroProduct() {
   return (
     <section className="relative pb-20 md:pb-32">
-      <div className="max-w-[1160px] mx-auto px-5">
+      <div className="max-w-[1160px] mx-auto px-5 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
